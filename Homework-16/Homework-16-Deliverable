@@ -1,0 +1,83 @@
+Homework 16 Deliverable
+
+1. Step 1: Google Dorking
+Altoro Mutual wants to ensure that private information that is unavailable on their public website cannot be found by searching the web.
+
+
+For example, Altoro Mutual does not mention their executive remembers on the website. Using Google, can you identify who the Chief Executive Officer?
+- Yes. Googling "Altoro Mutual CEO" returns multiple links that identify Karl Fitzgerald as Altoro's CEO.
+
+
+How can this information be helpful to an attacker?
+- Listing the names of C-level executives can provide attackers with easy targets for whaling campaigns. Whaling is essentially phishing targeted at high-ranking members of a company.
+
+
+Step 2: DNS and Domain Discovery
+The reconnaissance phase of a penetration test is possibly the most important phase of the engagement. Without a clear understanding of your client's assets, vulnerabilities can go unnoticed and later exploited.
+
+
+Navigate to centralops.net.
+
+
+Enter the IP address for demo.testfire.net into Domain Dossier and answer the following questions based on the results:
+
+
+Where is the company located?
+- The testfire.net domain is registered in Sunnyvale, California. The company which hosts their infrastructure, Rackspace Engineering, is located at 9725 Datapoint Drive, Suite 100 in San Antonio, Texas.
+
+What is the NetRange IP address?
+- The NetRange IP address is 65.61.137.64 - 65.61.137.127.
+
+What is the company they use to store their infrastructure?
+- Rackspace Backbone Engineering
+
+What is the IP address of the DNS server?
+- 65.61.137.117
+
+
+
+Step 3: Shodan
+Using Shodan and the information gathered from Google Dorking, find any other useful information that can be used in an attack.
+
+
+Navigate to shodan.io.
+
+
+Run a scan against the IP address of the DNS server for demo.testfire.net.
+
+What open ports and running services did Shodan find?
+- Shodan lists open ports 80 and 8080. Apache Tomcat web servers are running on both ports.
+
+
+
+Step 4: Recon-ng
+Altoro Mutual is also concerned about cross-site scripting attacks, which can cause havoc on their website. Verify whether or not Altoro Mutual is vulnerable to XSS by completing the following:
+
+Install the Recon module xssed.
+Set the source to demo.testfire.net.
+Run the module.
+
+Is Altoro Mutual vulnerable to XSS?
+- Yes, Altoro Mutual is vulnerable to XSS according to recon-ng's xssed module.
+
+Step 5: Zenmap
+Your client has asked that you help identify any vulnerabilities with their file-sharing server. Using the Metasploitable machine to act as your client's server, complete the following:
+
+
+Use Zenmap to run a service scan against the Metasploitable machine.
+- nmap -sV 192.168.0.10
+
+Bonus: In the same command, output the results into a new text file named zenmapscan.txt.
+- nmap -sV -oN zenmapscan.txt 192.168.0.10
+
+Use Zenmap's scripting engine to identify a vulnerability associated with the service running on the 139/445 port from your previous scan. Once you have identified this vulnerability, answer the following questions for your client:
+
+What is the vulnerability?
+SMBv1 servers are vulnerable to remote code execution via specially crafted messages.
+
+Why is it dangerous?
+Remote code execution vulnerabilities, if exploited successfully, allow an attacker full remote control over the target machine and its assets.
+This should be considered a critical vulnerability.
+
+What are your recommendations for the client to protect their server?
+Filter ports 139 and 445. Patch the SMB server with the latest security update.
