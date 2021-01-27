@@ -31,7 +31,7 @@ Proof of Concept:
 
 I began with a simple service version scan on the target machine using nmap to find all open ports and running services.
 
-![](/Homework-Deliverables/Homework-17/Screenshots/Screenshot-1.png)
+![](blairmoyes/Homework-Deliverables/Homework-17/Screenshots/Screenshot-1.png)
 
 Next, I ran a searchsploit query for exploits related to Icecast.
 
